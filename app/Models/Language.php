@@ -47,4 +47,20 @@ class Language extends Model
 
         return implode(', ', $state);
     }
+
+    public static function getDefault(): ?Language
+    {
+        $defaultLanguage = Language::query()
+            ->where('active', true)
+            ->where('default', true)
+            ->first();
+    }
+
+    public static function getFallback(): ?Language
+    {
+        $fallbackLanguage = Language::query()
+            ->where('active', true)
+            ->where('fallback', true)
+            ->first();
+    }
 }
