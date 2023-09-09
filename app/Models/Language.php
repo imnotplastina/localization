@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -48,17 +49,17 @@ class Language extends Model
         return implode(', ', $state);
     }
 
-    public static function getDefault(): ?Language
+    public static function getDefault(): Builder|Model|null
     {
-        $defaultLanguage = Language::query()
+        return Language::query()
             ->where('active', true)
             ->where('default', true)
             ->first();
     }
 
-    public static function getFallback(): ?Language
+    public static function getFallback(): Builder|Model|null
     {
-        $fallbackLanguage = Language::query()
+        return Language::query()
             ->where('active', true)
             ->where('fallback', true)
             ->first();
