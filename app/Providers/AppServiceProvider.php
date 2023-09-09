@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Language;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @method app()
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,11 +24,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $language = Language::query()
-            ->where('active', true)
-            ->where('default', true)
-            ->first();
+        if (Schema::hasTable((new Language())->getTable())) {
+            $this->setDefaultLocale();
+            $this->setFallbackLocale();
+        }
+    }
 
-        $language && $this->app->setLocale($language->id);
+    private function setDefaultLocale(): void
+    {
+        $defaultLanguage = Language::getDefault();
+
+        $defaultLanguage && $this->app->setLocale($defaultLanguage->id);
+    }
+
+    private function setFallbackLocale(): void
+    {
+        $fallbackLanguage = Language::getFallback();
+
+        $fallbackLanguage && $this->app->setFallbackLocale($fallbackLanguage->id);
     }
 }
