@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Language;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $language = Language::query()
+            ->where('active', true)
+            ->where('default', true)
+            ->first();
+
+        $language && $this->app->setLocale($language->id);
     }
 }
