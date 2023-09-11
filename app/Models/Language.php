@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * @property int $id
@@ -63,5 +65,20 @@ class Language extends Model
             ->where('active', true)
             ->where('fallback', true)
             ->first();
+    }
+
+    public static function routePrefix(): ?string
+    {
+        $prefix = request()->segment(1);
+
+        $activeLanguages = Language::query()
+            ->where('active', true)
+            ->get();
+
+        if($activeLanguages->doesntContain('id', $prefix)) {
+            $prefix = null;
+        }
+
+        return $prefix;
     }
 }
