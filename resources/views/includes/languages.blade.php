@@ -1,4 +1,4 @@
-@php($languages = App\Models\Language::query()->where('active', true)->get())
+@php($languages = App\Models\Language::getActive())
 
 <li class="nav-item dropdown">
     <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

@@ -14,9 +14,7 @@ class LanguageHeaderMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $languages = Language::query()
-            ->where('active', true)
-            ->get();
+        $languages = Language::getActive();
 
         $preferredLanguage = $request->getPreferredLanguage(
             $languages->pluck('id')->toArray()
