@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use http\Env\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @property int $id
@@ -32,6 +32,13 @@ class Language extends Model
         'fallback' => 'boolean',
     ];
 
+    public static function booted(): void
+    {
+        self::saved(function (self $language) {
+            Cache::forget('languages');
+        });
+    }
+
     public function getStateText(): string
     {
         $state = [];
@@ -51,20 +58,29 @@ class Language extends Model
         return implode(', ', $state);
     }
 
-    public static function getDefault(): Builder|Model|null
+    public static function getDefault(): ?Language
     {
-        return Language::query()
-            ->where('active', true)
-            ->where('default', true)
-            ->first();
+        return Language::getActive()
+            ->firstWhere('default', true);
     }
 
-    public static function getFallback(): Builder|Model|null
+    public static function getFallback(): ?Language
     {
-        return Language::query()
-            ->where('active', true)
-            ->where('fallback', true)
-            ->first();
+        return Language::getActive()
+            ->firstWhere('fallback', true);
+    }
+
+    public static function getActive(): Collection
+    {
+        return Cache::remember(
+            key: 'languages',
+            ttl: now()->addDay(),
+            callback: function () {
+                return self::query()
+                    ->where('active', true)
+                    ->get();
+            }
+        );
     }
 
     public static function routePrefix(): ?string

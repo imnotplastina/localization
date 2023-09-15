@@ -24,9 +24,8 @@ class LanguageCookieMiddleware
             return $next($request);
         }
 
-        $language = Language::query()
-            ->where('active', true)
-            ->find($id);
+        $language = Language::getActive()
+            ->where('id', $id);
 
         $language && app()->setLocale($id);
 
