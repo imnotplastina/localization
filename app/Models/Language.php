@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Cache;
  */
 class Language extends Model
 {
+    use HasFactory;
+
     protected $keyType = 'string';
 
     public $incrementing = false;
