@@ -11,7 +11,7 @@
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link {{ active_link('home', 'text-primary') }}"
                         aria-current="page">
-                        Главная
+                        {{ trans('navbar.main') }}
                     </a>
                 </li>
             </ul>

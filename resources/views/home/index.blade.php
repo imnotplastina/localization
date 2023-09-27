@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
-@section('main.title', 'Главная')
+@section('main.title', trans('main.title'))
 
 @section('main.content')
-    Контент главной страницы
+    {{ trans('main.content') }}
 @endsection
