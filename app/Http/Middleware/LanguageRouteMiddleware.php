@@ -14,13 +14,13 @@ class LanguageRouteMiddleware
 {
     private ?string $prefix;
     private string $currentLanguage;
-    private string $defaultLanguage;
+    private ?string $defaultLanguage;
 
     public function __construct()
     {
         $this->prefix = Language::routePrefix();
         $this->currentLanguage = app()->getLocale();
-        $this->defaultLanguage = Language::getDefault()->id;
+        $this->defaultLanguage = Language::getDefault()?->id;
     }
 
     /**
