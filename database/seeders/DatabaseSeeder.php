@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Language\DeutschSeeder;
+use Database\Seeders\Language\EnglishSeeder;
+use Database\Seeders\Language\ItalianSeeder;
+use Database\Seeders\Language\RussianSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            EnglishSeeder::class,
+            DeutschSeeder::class,
+            ItalianSeeder::class,
+            RussianSeeder::class,
+        ]);
     }
 }
