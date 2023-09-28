@@ -14,6 +14,13 @@
                         {{ trans('navbar.main') }}
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('pluralization') }}" class="nav-link {{ active_link('pluralization', 'text-primary') }}"
+                       aria-current="page">
+                        {{ trans('navbar.pluralization') }}
+                    </a>
+                </li>
             </ul>
 
             <ul class="navbar-nav">
