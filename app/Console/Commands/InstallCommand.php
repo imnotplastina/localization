@@ -11,9 +11,10 @@ class InstallCommand extends Command
 
     protected $description = 'Установить приложение';
 
-    public function handle()
+    public function handle(): void
     {
         $this->call(InstallLanguagesCommand::class);
+        $this->call(InstallTranslationsCommand::class);
 
         $this->info('Приложение установлено');
     }

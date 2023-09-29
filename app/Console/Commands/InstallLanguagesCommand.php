@@ -20,6 +20,8 @@ class InstallLanguagesCommand extends Command
 
     private function createLanguages(): void
     {
+        if (Language::query()->exists()) return;
+
         $templates = [
             ['id' => 'ru', 'name' => 'Русский', 'active' => true, 'default' => true, 'fallback' => false],
             ['id' => 'en', 'name' => 'English', 'active' => true, 'default' => false, 'fallback' => true],
