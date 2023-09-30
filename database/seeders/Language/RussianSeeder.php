@@ -15,7 +15,7 @@ class RussianSeeder extends Seeder
     {
         Language::factory()->create([
             'id' => 'ru',
-            'name' => 'Russian',
+            'name' => 'Русский',
             'active' => true,
             'default' => true,
         ]);
