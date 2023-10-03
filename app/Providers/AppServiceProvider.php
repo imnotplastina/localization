@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Language;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
 
     private function setDefaultLocale(): void
     {
+        Paginator::useBootstrapFive();
+
         $defaultLanguage = Language::getDefault();
 
         $defaultLanguage && $this->app->setLocale($defaultLanguage->id);
