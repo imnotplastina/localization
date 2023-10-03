@@ -21,6 +21,17 @@
                         Языки
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.translations.index') }}"
+                        class="nav-link {{ active_link('admin.translations*', 'text-primary') }}" aria-current="page">
+                        Тексты
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                @include('includes.languages')
             </ul>
         </div>
     </div>
