@@ -9,4 +9,5 @@
 5. Установить composer зависимости ```sail composer install```
 6. Запустить миграции ```sail artisan migrate --seed```
 7. Установить переводы ```sail artisan install```
-8. Открыть адрес [localhost](http://localhost)
+8. Запустить сервер ```sail artisan serve```
+9. Открыть адрес [localhost](http://localhost)
